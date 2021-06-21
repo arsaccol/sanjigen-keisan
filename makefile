@@ -1,4 +1,4 @@
 SRC = main.cpp
 
 all:
-	g++ $(SRC) -o test
+	g++ -g $(SRC) -o test
