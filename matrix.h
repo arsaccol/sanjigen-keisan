@@ -20,7 +20,12 @@ struct Matrix
 
     Matrix(std::initializer_list<std::initializer_list<float>>);
     void print();
+
+    //template <int I, int J>
+    //friend std::ostream& operator<<(std::ostream&, const Matrix<I,J>);
 };
+
+using Mat4 = Matrix<4,4>;
 
 
 // ===== nested initializer_list constructor =====
@@ -35,11 +40,12 @@ Matrix<M, N>::Matrix(std::initializer_list<std::initializer_list<float>> values)
     size_t i = 0;
     for(auto& col : values)
     {
+        if(col.size() != N)
+            throw std::invalid_argument("Matrix column number is larger than it should");
+
         std::copy(col.begin(), col.end(), data[i]);
         ++i;
     }
-
-    //std::copy(std::begin(values), std::end(values), data);
 }
 // ===================================================
 
@@ -58,5 +64,25 @@ void Matrix<M,N>::print()
 
         std::cout << sstr.str() << std::endl;
     }
+}
+// ===================================================
+
+
+// =============== stream output operator ============
+template<int M, int N>
+std::ostream& operator<<(std::ostream& out, const Matrix<M,N>& mat)
+{
+    for(size_t i = 0; i < M; ++i)
+    {
+        std::stringstream sstr;
+        for(size_t j = 0; j < N; ++j)
+        {
+            sstr << mat.data[i][j] << " ";
+        }
+
+        out << sstr.str() << std::endl;
+    }
+
+    return out;
 }
 // ===================================================

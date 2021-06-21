@@ -12,7 +12,9 @@ int main()
         {41, 42, 43, 44}
     };
 
-    mat.print();
+    //mat.print();
+
+    std::cout << mat << std::endl;
 
     return 0;
 }
