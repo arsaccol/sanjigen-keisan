@@ -1,2 +1,4 @@
+SRC = main.cpp
+
 all:
-	g++ main.cpp -o test
+	g++ $(SRC) -o test
