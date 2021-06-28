@@ -31,13 +31,7 @@ struct Matrix
 };
 
 using Mat4 = Matrix<4,4>;
-
-
-template <int N>
-struct Mat : public Matrix<N,N>
-{
-};
-
+using Mat3 = Matrix<3, 3>;
 
 
 // ===== nested initializer_list constructor =====
