@@ -14,7 +14,7 @@
 template <int M, int N>
 struct Matrix
 {
-    float data[M][N];
+    float data[M][N]{};
     //std::array<float, M * N> data;
 
 
@@ -22,6 +22,8 @@ struct Matrix
     Matrix(std::initializer_list<std::initializer_list<float>>);
     Matrix(const Matrix& other);
     Matrix<M, N>& operator=(const Matrix<M,N>& other);
+
+    static Matrix<M, N> identity();
     void print();
 
     //template <int I, int J>
@@ -134,5 +136,21 @@ Matrix<M,N> operator+(const Matrix<M,N>& lhs, const Matrix<M,N>& rhs)
 
     // wasteful copies? optimize later with move semantics I suppose?
     return mat;
+}
+// ===================================================
+
+
+// ================ get identity matrix ==============
+template<int M, int N>
+Matrix<M, N> Matrix<M,N>::identity()
+{
+    if(M != N)
+        throw std::invalid_argument{"Wrong matrix dimensions: identity matrix must be square"};
+
+    Matrix<M, N> idMat;
+    for(size_t i = 0; i < M; ++i)
+        idMat.data[i][i] = 1;
+
+    return idMat;
 }
 // ===================================================

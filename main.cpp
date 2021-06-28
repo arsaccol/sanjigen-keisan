@@ -30,5 +30,15 @@ int main()
 
     std::cout << STR(matC) << std::endl << matC << std::endl;
 
+    std::cout << "Identity matrix: " << std::endl << Matrix<4,4>::identity() << std::endl;
+    try {
+        std::cout << "Trying to get id matrix with wrong size..." << std::endl;
+        std::cout << Matrix<4,3>::identity() << std::endl;
+    }
+    catch(const std::exception& e){
+        std::cout << "Something wrong happened (as expected), let's see what it is: " << std::endl << e.what() << std::endl;
+    }
+
+
     return 0;
 }
