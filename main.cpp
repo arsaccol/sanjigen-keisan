@@ -39,6 +39,9 @@ int main()
         std::cout << "Something wrong happened (as expected), let's see what it is: " << std::endl << e.what() << std::endl;
     }
 
+    auto identityMat4 = Mat<4>::identity();
+    std::cout << "Identity Mat<4>: " << std::endl << identityMat4 << std::endl;
+
 
     return 0;
 }

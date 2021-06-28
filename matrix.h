@@ -33,6 +33,13 @@ struct Matrix
 using Mat4 = Matrix<4,4>;
 
 
+template <int N>
+struct Mat : public Matrix<N,N>
+{
+};
+
+
+
 // ===== nested initializer_list constructor =====
 template <int M, int N>
 Matrix<M, N>::Matrix(std::initializer_list<std::initializer_list<float>> values)
@@ -154,3 +161,6 @@ Matrix<M, N> Matrix<M,N>::identity()
     return idMat;
 }
 // ===================================================
+
+
+
