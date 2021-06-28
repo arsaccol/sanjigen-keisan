@@ -18,7 +18,10 @@ struct Matrix
     //std::array<float, M * N> data;
 
 
+    Matrix() = default;
     Matrix(std::initializer_list<std::initializer_list<float>>);
+    Matrix(const Matrix& other);
+    Matrix<M, N>& operator=(const Matrix<M,N>& other);
     void print();
 
     //template <int I, int J>
@@ -46,6 +49,32 @@ Matrix<M, N>::Matrix(std::initializer_list<std::initializer_list<float>> values)
         std::copy(col.begin(), col.end(), data[i]);
         ++i;
     }
+}
+// ===================================================
+
+
+// ================ copy constructor ==================
+template <int M, int N>
+Matrix<M,N>::Matrix(const Matrix<M,N>& other)
+{
+    for(size_t i = 0; i < M; ++i)
+    {
+        std::copy_n(other.data[i], N, data[i]);
+    }
+}
+// ===================================================
+    
+
+// ================ copy assignment operator ==================
+template <int M, int N>
+Matrix<M,N>& Matrix<M,N>::operator=(const Matrix<M,N>& other)
+{
+    for(size_t i = 0; i < M; ++i)
+    {
+        std::copy_n(other.data[i], N, data[i]);
+    }
+
+    return *this;
 }
 // ===================================================
 
@@ -84,5 +113,26 @@ std::ostream& operator<<(std::ostream& out, const Matrix<M,N>& mat)
     }
 
     return out;
+}
+// ===================================================
+
+
+// =================== matrix addition ===============
+template<int M, int N>
+Matrix<M,N> operator+(const Matrix<M,N>& lhs, const Matrix<M,N>& rhs)
+{
+    Matrix<M, N> mat;
+    std::cout << "It's matrix addition time!" << std::endl;
+
+    for(int i = 0; i < M; ++i)
+    {
+        for(int j = 0; j < N; ++j)
+        {
+            mat.data[i][j] = lhs.data[i][j] + rhs.data[i][j];
+        }
+    }
+
+    // wasteful copies? optimize later with move semantics I suppose?
+    return mat;
 }
 // ===================================================
