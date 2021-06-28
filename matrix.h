@@ -146,6 +146,37 @@ Matrix<M,N> operator+(const Matrix<M,N>& lhs, const Matrix<M,N>& rhs)
 }
 // ===================================================
 
+// =============== matrix multiplication =============
+template<int M, int N, int P, int Q>
+Matrix<M, Q> operator*(const Matrix<M, N>& lhs, const Matrix<P, Q>& rhs)
+{
+    // naive, slow implementation
+    if(N != P)
+        throw std::invalid_argument{
+            "Wrong matrix multiplication dimensions: nr. of columns in first matrix must match nr. of rows in second"
+        };
+
+    Matrix<M, Q> result;
+
+    for(size_t i = 0; i < M; ++i)
+    {
+        for(size_t j = 0; j < Q; ++j)
+        {
+            float result_ij = 0;
+
+            for(size_t k = 0; k < N; ++k)
+                result_ij += lhs.data[i][k] * rhs.data[k][j];
+
+            result.data[i][j] = result_ij;
+        }
+    }
+
+
+    return result;
+}
+
+
+// ===================================================
 
 // ================ get identity matrix ==============
 template<int M, int N>

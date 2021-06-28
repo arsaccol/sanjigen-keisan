@@ -42,6 +42,31 @@ int main()
     auto identityMat4 = Mat<4>::identity();
     std::cout << "Identity Mat<4>: " << std::endl << identityMat4 << std::endl;
 
+    auto mat23 = Matrix<2, 3>{ {1, 2, 3}, {4, 5, 6} };
+    auto mat34 = Matrix<3, 4>{ {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}}; 
+    auto result = mat23 * mat34;
+    std::cout << "Result of multiplication between " << STR(mat23) << " and " << STR(mat34) << std::endl << result << std::endl;
+
+    auto mat4_a = Mat4{
+        {1, 2, 3, 4}, 
+        {5, 6, 7, 8}, 
+        {9, 10, 11, 12}, 
+        {13, 14, 15, 16}, 
+    };
+
+    auto mat4_b = Mat4{
+        {1, 2, 3, 4}, 
+        {5, 6, 7, 8}, 
+        {9, 10, 11, 12}, 
+        {13, 14, 15, 16}, 
+    };
+
+    auto result_4x4 = mat4_a * mat4_b;
+    std::cout << "Result of multiplication between " << STR(mat4_a) << " and " << STR(mat4_b) << std::endl << result_4x4 << std::endl;
+
+    std::cout << "Identity times identity should still be identity, see: " << std::endl << Matrix<3, 3>::identity() * Matrix<3,3>::identity() << std::endl;
+
+
 
     return 0;
 }
