@@ -39,7 +39,7 @@ int main()
         std::cout << "Something wrong happened (as expected), let's see what it is: " << std::endl << e.what() << std::endl;
     }
 
-    auto identityMat4 = Mat<4>::identity();
+    auto identityMat4 = Matrix<4, 4>::identity();
     std::cout << "Identity Mat<4>: " << std::endl << identityMat4 << std::endl;
 
     auto mat23 = Matrix<2, 3>{ {1, 2, 3}, {4, 5, 6} };
